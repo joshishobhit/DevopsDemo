@@ -6,10 +6,15 @@ pipeline {
         sh 'dotnet restore DevopsDemo.csproj'
       }
     }
-    stage('Dotnet Build') {
+    stage('Build & Analysis') {
       steps {
-        sh 'sudo dotnet build "DevopsDemo.csproj" -c Release -o /app/build'
-      }
+        sh '''
+           sudo dotnet /opt/sonarscanner_dotnet/SonarScanner.MSBuild.dll begin /k:"dotnet_demo" /d:sonar.login="ed21c0d4272a7631e40713a91c884e902ca67f9e"
+           sudo dotnet build "DevopsDemo.csproj" -c Release -o /app/build
+           sudo dotnet /opt/sonarscanner_dotnet/SonarScanner.MSBuild.dll end /d:sonar.login="ed21c0d4272a7631e40713a91c884e902ca67f9e"
+
+           '''
+      }   
     }
     stage('building docker image from docker file by tagging') {
       steps {
@@ -20,12 +25,7 @@ pipeline {
       steps {
         sh 'docker push xlshobhit/devopsdemo:$BUILD_NUMBER'
       }   
-    }
-    // stage('deploying the docker image into EC2 instance and run the container') {
-    //   steps {
-    //     sh 'ansible-playbook deploy.yml --extra-vars="buildNumber=$BUILD_NUMBER"'
-    //   }   
-    // }  
+    }  
 }
 post {
     failure {
