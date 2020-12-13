@@ -16,6 +16,11 @@ pipeline {
         sh 'sudo docker build -t xlshobhit/devopsdemo:$BUILD_NUMBER .'
       }   
     }
+    stage('logging into docker hub') {
+      steps {
+        sh 'docker login --username="xlshobhit" --password="Xpertladr@123"'
+      }   
+    }
     stage('push Image to HUB') {
       steps {
         sh 'sudo docker push xlshobhit/devopsdemo:$BUILD_NUMBER'
