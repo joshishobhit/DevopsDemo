@@ -29,7 +29,7 @@ pipeline {
 		}  
 		stage('Application Deploy') {
 			steps {
-				sh 'ansible-playbook deploy.yml --extra-vars="buildNumber=$BUILD_NUMBER"'
+				sh 'sudo ansible-playbook deploy.yml --extra-vars="buildNumber=$BUILD_NUMBER"'
 				}
 			}   
 		}		
