@@ -20,3 +20,9 @@
 
    - name: Run a container from the pulled image
      command: docker run -d --name shobhit-c1 -p 9500:80 xlshobhit/devopsdemo:"{{buildNumber}}"
+  
+   - name: Giving permissions to docker sock
+     command: chmod 777 -R /var/run/docker.sock
+     
+   - name: Removing old docker images
+     command: docker rmi -f $(docker images -aq)
