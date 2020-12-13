@@ -25,4 +25,4 @@
      command: chmod 777 -R /var/run/docker.sock
      
    - name: Removing old docker images
-     command: docker rmi -f $(docker images -aq)
+     command: docker rmi -f "$(docker images -aq)"
