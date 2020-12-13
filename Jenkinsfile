@@ -13,12 +13,12 @@ pipeline {
     }
     stage('building docker image') {
       steps {
-        sh 'docker build -t xlshobhit/devopsdemo:$BUILD_NUMBER .'
+        sh 'sudo docker build -t xlshobhit/devopsdemo:$BUILD_NUMBER .'
       }   
     }
     stage('push Image to HUB') {
       steps {
-        sh 'docker push xlshobhit/devopsdemo:$BUILD_NUMBER'
+        sh 'sudo docker push xlshobhit/devopsdemo:$BUILD_NUMBER'
       }   
     }  
 }
