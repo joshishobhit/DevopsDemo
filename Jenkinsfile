@@ -11,7 +11,7 @@ pipeline {
            '''
       }   
     }
-    stage('building docker image from docker file by tagging') {
+    stage('building docker image') {
       steps {
         sh 'docker build -t xlshobhit/devopsdemo:$BUILD_NUMBER .'
       }   
