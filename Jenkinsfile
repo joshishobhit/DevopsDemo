@@ -1,11 +1,6 @@
 pipeline {
   agent any
-  stages {
-    stage('Restore Project') {
-      steps {
-        sh 'dotnet restore DevopsDemo.csproj'
-      }
-    }
+  stages {    
     stage('Build & Analysis') {
       steps {
         sh '''
