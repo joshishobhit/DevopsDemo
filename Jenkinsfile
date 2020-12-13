@@ -32,8 +32,7 @@ pipeline {
             docker run -itd --name=shobhit-c1 -p 9500:80 xlshobhit/devopsdemo:$BUILD_NUMBER            
            '''
       }   
-    }
-}
+	}
 post {
     failure {
         mail to: 'joshi.shobhit@gmail.com',
