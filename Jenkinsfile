@@ -29,13 +29,10 @@ pipeline {
 		}  
 		stage('Application Deploy') {
 			steps {
-				sh '''
-					sudo docker rm -f shobhit-c1
-					docker run -itd --name=shobhit-c1 -p 9500:80 xlshobhit/devopsdemo:$BUILD_NUMBER            
-				'''
+				sh 'ansible-playbook deploy.yml --extra-vars="buildNumber=$BUILD_NUMBER"'
 				}
 			}   
-		}
+		}		
 	post {
 		failure {
 			mail to: 'joshi.shobhit@gmail.com',
