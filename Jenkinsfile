@@ -12,22 +12,22 @@ pipeline {
 						'''
 				}   
 		}
-		stage('building docker image') {
+		stage('Docker Build') {
 			steps {
 				sh 'sudo docker build -t xlshobhit/devopsdemo:$BUILD_NUMBER .'
 			}   
 		}
-		stage('logging into docker hub') {
+		stage('Login DockerHub') {
 			steps {
 				sh 'docker login --username="xlshobhit" --password="Xpertladr@123"'
 			}   
 		}
-		stage('push Image to HUB') {
+		stage('Push Image') {
 			steps {
 				sh 'sudo docker push xlshobhit/devopsdemo:$BUILD_NUMBER'
 			}   
 		}  
-		stage('Application Deploy') {
+		stage('Deploy App') {
 			steps {
 				sh 'sudo ansible-playbook deploy.yml --extra-vars="buildNumber=$BUILD_NUMBER"'
 				}
