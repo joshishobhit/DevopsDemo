@@ -26,15 +26,22 @@ pipeline {
         sh 'sudo docker push xlshobhit/devopsdemo:$BUILD_NUMBER'
       }   
     }  
+    steps {
+        sh '''
+            sudo docker rm -f shobhit-c1
+            docker run -itd --name=shobhit-c1 -p 9500:80 xlshobhit/devopsdemo:$BUILD_NUMBER            
+           '''
+      }   
+    }
 }
 post {
     failure {
-        mail to: 'shobhit@xpertladr.com',
+        mail to: 'joshi.shobhit@gmail.com',
              subject: "Failed Pipeline: ${BUILD_NUMBER}",
              body: "Something is wrong with ${env.BUILD_URL}"
     }
      success {
-        mail to: 'shobhit@xpertladr.com',
+        mail to: 'joshi.shobhit@gmail.com',
              subject: "successful Pipeline:  ${env.BUILD_NUMBER}",
              body: "Your pipeline is success ${env.BUILD_URL}"
     }
