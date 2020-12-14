@@ -17,6 +17,11 @@ namespace DevopsDemo.Pages
             _logger = logger;
         }
 
+        public void GetName(string id)
+        {
+            var myId = id;
+        }
+
         public void OnGet()
         {
 
