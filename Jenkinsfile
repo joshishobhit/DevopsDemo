@@ -19,7 +19,11 @@ pipeline {
 		}
 		stage('Login DockerHub') {
 			steps {
-				sh 'docker login --username="xlshobhit" --password="Xpertladr@123"'
+				sh '''
+					sudo chmod 777 -R /var/run/docker.sock
+					docker login --username="xlshobhit" --password="Xpertladr@123"
+
+					'''
 			}   
 		}
 		stage('Push Image') {
